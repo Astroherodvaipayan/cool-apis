@@ -37,13 +37,11 @@ def query_schema(schema):
     if schema not in ['schema1', 'schema2', 'schema3', 'schema4', 'schema5']:
         return jsonify({'error': 'Invalid schema'}), 400
     
-    # Select the appropriate model class based on the schema provided
     model_class = globals()[schema.capitalize()]
     
     # Query the database using SQLAlchemy
     results = model_class.query.all()
     
-    # Return the results directly as JSON without serialization
     return jsonify([result.id for result in results])
 
 if __name__ == '__main__':
